@@ -81,11 +81,14 @@ gcc -Wall -Werror -Wextra -pedantic -std=gnu89 *.c -o hsh
 
 NEANT
 
-##  Manual
+```md id="8z1x0g"
+## Manual
 
-Use the following command to access the manual:
+To open the manual page, run:
 
-man ./man_1_simple_shell
+```bash
+$ man ./man_1_simple_shell
+```
 
 ##  Limitations
 
