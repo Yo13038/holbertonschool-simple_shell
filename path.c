@@ -57,52 +57,106 @@ int contains_slash(char *command)
 	return (0);
 }
 /**
- * find_command - Finds the full path of a given command.
- * @command: The command to locate (e.g., "ls").
+ * build_path - Combines a directory path and a command name into a full path.
+ * @dir: The directory (e.g., "/bin").
+ * @cmd: The command name (e.g., "ls").
  *
- * Return: A pointer to the full path string, or NULL if not found.
+ * Return: allocated string containing the full path, or NULL on failure.
+ */
+char *build_path(char *dir, char *cmd)
+{
+	char *path;
+	int len_dir, len_cmd;
+
+	if (dir == NULL || cmd == NULL)
+		return (NULL);
+
+	len_dir = _strlen(dir);
+	len_cmd = _strlen(cmd);
+
+	/* Allocate memory */
+	path = malloc(sizeof(char) * (len_dir + len_cmd + 2));
+	
+	if (path == NULL)
+		return (NULL);
+
+	/* Build the string */
+	_strcpy(path, dir);     /* Copy directory */
+	path[len_dir] = '/';    /* Add slash at the end of directory */
+	_strcpy(path + len_dir + 1, cmd); /* Copy command right after '/' */
+
+	return (path);
+}
+
+/**
+ * is_executable_command - Checks if a file exists and is accessible.
+ * @path: The full path to the file to check.
+ *
+ * Return: 1 if the file is found, 0 otherwise.
+ */
+int is_executable_command(char *path)
+{
+	struct stat st;
+
+	/* Check if the path is valid and if stat can find the file */
+	if (path != NULL && stat(path, &st) == 0)
+	{
+		return (1);
+	}
+	return (0);
+}
+
+/**
+ * find_command - Locates an executable command within the PATH directories.
+ * @command: The name of the command (e.g., "ls").
+ *
+ * Return: A newly allocated string containing the full path, 
+ * or NULL if the command is not found.
  */
 char *find_command(char *command)
 {
 	char *path_env, *path_copy, *token, *full_path;
-	struct stat st;
 
-	/* Handle direct paths (e.g., /bin/ls */
-	if (contains_slash(command))
-	{
-		if (stat(command, &st) == 0)
-			return (_strdup(command));
-		else
-			return (NULL);
-	}
-	
-	/* Retrieve the PATH */
-	path_env = _getenv("PATH");
-	if (!path_env || _strlen(path_env) == 0)
+	if (command == NULL)
 		return (NULL);
 
-	/* Copy PATH to tokenize it */
+	/* Handle cases where command is already a full or relative path */
+	if (contains_slash(command))
+	{
+		if (is_executable_command(command))
+			return (_strdup(command)); /* Return a copy to be freed later */
+		return (NULL);
+	}
+
+	/* Get the content of the PATH environment variable */
+	path_env = _getenv("PATH");
+	if (!path_env)
+		return (NULL);
+
+	/* Duplicate PATH because strtok modifies the string */
 	path_copy = _strdup(path_env);
 	if (!path_copy)
 		return (NULL);
 
-	/*Loop through directories in PATH */
+	/* Split PATH into directory tokens and test them */
 	token = strtok(path_copy, ":");
-	
 	while (token != NULL)
 	{
+		/* Create the potential full path */
 		full_path = build_path(token, command);
-		
-		if (stat(full_path, &st) == 0)
+
+		if (is_executable_command(full_path))
 		{
-			free(path_copy); /* Clean up the copy */
-			return (full_path); /* Found the executable! */
+			free(path_copy); /* Freework copy */
+			return (full_path); /* Success! Return the allocated path */
 		}
-		
-		free(full_path); /* Not found, free and try next directory */
+
+		/* If not found, free the failed path and move to next token */
+		free(full_path);
 		token = strtok(NULL, ":");
 	}
 
+	/* free and return NULL if command is not to be found */
 	free(path_copy);
-	return (NULL); /* Command was not found in PATH */
+	return (NULL);
 }
