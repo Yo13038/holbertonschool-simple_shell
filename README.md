@@ -13,17 +13,17 @@ A custom implementation of a Unix command line interpreter, built from scratch i
 
 <br>
 
-*  [Description](#-description)
-*  [Features](#-features)
-*  [Project Structure](#️-project-structure)
-*  [Installation](#️-installation)
-*  [Compilation](#️-compilation)
-*  [Usage](#️-usage)
-*  [Manual](#-manual)
-*  [Limitations](#️-limitations)
-*  [Valgrind](#-valgrind)
-*  [Flowchart](#-flowchart)
-*  [Authors](#-authors)
+*  [Description](#description)
+*  [Features](#features)
+*  [Project Structure](#️project-structure)
+*  [Installation](#️installation)
+*  [Compilation](#️compilation)
+*  [Usage](#️usage)
+*  [Manual](#manual)
+*  [Limitations](#️limitations)
+*  [Valgrind](#valgrind)
+*  [Flowchart](#flowchart)
+*  [Authors](#authors)
 
 </details>
 
