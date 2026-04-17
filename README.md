@@ -81,7 +81,6 @@ gcc -Wall -Werror -Wextra -pedantic -std=gnu89 *.c -o hsh
 
 NEANT
 
-```md id="8z1x0g"
 ## Manual
 
 To open the manual page, run:
