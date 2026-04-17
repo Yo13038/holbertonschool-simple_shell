@@ -14,7 +14,7 @@ char *_getenv(const char *name)
 	/* Check for NULL inputs or empty environment */
 	if (environ == NULL || name == NULL)
 		return (NULL);
-	
+
 	/* Go through the environment until the end (NULL) */
 	while (environ[i] != NULL)
 	{
@@ -76,7 +76,7 @@ char *build_path(char *dir, char *cmd)
 
 	/* Allocate memory */
 	path = malloc(sizeof(char) * (len_dir + len_cmd + 2));
-	
+
 	if (path == NULL)
 		return (NULL);
 
@@ -110,7 +110,7 @@ int is_executable_command(char *path)
  * find_command - Locates an executable command within the PATH directories.
  * @command: The name of the command (e.g., "ls").
  *
- * Return: A newly allocated string containing the full path, 
+ * Return: A newly allocated string containing the full path
  * or NULL if the command is not found.
  */
 char *find_command(char *command)
@@ -119,7 +119,6 @@ char *find_command(char *command)
 
 	if (command == NULL)
 		return (NULL);
-
 	/* Handle cases where command is already a full or relative path */
 	if (contains_slash(command))
 	{
@@ -127,35 +126,29 @@ char *find_command(char *command)
 			return (_strdup(command)); /* Return a copy to be freed later */
 		return (NULL);
 	}
-
 	/* Get the content of the PATH environment variable */
 	path_env = _getenv("PATH");
 	if (!path_env)
 		return (NULL);
-
 	/* Duplicate PATH because strtok modifies the string */
 	path_copy = _strdup(path_env);
 	if (!path_copy)
 		return (NULL);
-
 	/* Split PATH into directory tokens and test them */
 	token = strtok(path_copy, ":");
 	while (token != NULL)
 	{
 		/* Create the potential full path */
 		full_path = build_path(token, command);
-
 		if (is_executable_command(full_path))
 		{
 			free(path_copy); /* Freework copy */
 			return (full_path); /* Success! Return the allocated path */
 		}
-
 		/* If not found, free the failed path and move to next token */
 		free(full_path);
 		token = strtok(NULL, ":");
 	}
-
 	/* free and return NULL if command is not to be found */
 	free(path_copy);
 	return (NULL);
