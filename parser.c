@@ -14,7 +14,6 @@ char **parse_line(char *line)
 
 	if (line == NULL)
 		return (NULL);
-
 	/* count the number of tokens to know how much memory to allocate */
 	/* use a copy because strtok modifies the string */
 	line_copy = _strdup(line);
@@ -25,12 +24,10 @@ char **parse_line(char *line)
 		token = strtok(NULL, " \t\n\r");
 	}
 	free(line_copy);
-
 	/* allocate the array of pointers (+1 for the NULL) */
 	argv = malloc(sizeof(char *) * (count + 1));
 	if (argv == NULL)
 		return (NULL);
-
 	/* split the line and fill the array */
 	token = strtok(line, " \t\n\r");
 	while (token)
