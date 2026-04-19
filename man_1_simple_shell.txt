@@ -1,0 +1,67 @@
+.TH SIMPLE_SHELL 1 "APRIL 23 2024" "Simple Shell Project" "User Commands"
+.SH NAME
+simple_shell \- A custom UNIX command line interpreter
+.SH SYNOPSIS
+.B ./hsh
+.SH DESCRIPTION
+.B simple_shell
+is a command language interpreter that executes commands read from the standard input or from a file. It mimics the basic behavior of the sh (Bourne Shell).
+
+The shell works by:
+1. Displaying a prompt and waiting for the user to type a command.
+2. Parsing the input into tokens (arguments).
+3. Checking if the command is a builtin.
+4. Locating the command in the PATH if it's not a builtin or a direct path.
+5. Executing the command in a new process using fork and execve.
+6. Waiting for the command to finish and returning to the prompt.
+
+.SH FEATURES
+.TP
+.B Interactive Mode
+The shell displays a prompt ($) when connected to a terminal (isatty).
+.TP
+.B Non-Interactive Mode
+The shell can read commands via pipes or redirected files: 'echo "ls" | ./hsh'.
+.TP
+.B PATH Handling
+The shell automatically searches for executables in the directories listed in the PATH environment variable.
+.TP
+.B Command Line Arguments
+Supports commands with multiple arguments (e.g., 'ls -l /tmp').
+
+.SH BUILT-IN COMMANDS
+.TP
+.B exit
+Terminates the shell process.
+.TP
+.B env
+Prints the current environment variables.
+
+.SH EXIT STATUS
+.B simple_shell
+returns the status of the last command executed. If a command is not found, it returns 127.
+
+.SH EXAMPLES
+.I To start the shell:
+.br
+    ./hsh
+.br
+.I To run a command with arguments:
+.br
+    $ /bin/ls -l
+.br
+    $ ls -l
+.br
+.I To exit:
+.br
+    $ exit
+
+.SH AUTHORS
+Written by Jonathan Martin and Yoann Lages as part of the Holberton School Simple Shell project.
+
+.SH SEE ALSO
+.BR sh (1),
+.BR bash (1),
+.BR execve (2),
+.BR fork (2),
+.BR wait (2)
