@@ -1,5 +1,4 @@
 #include "main.h"
-
 /**
  * execute_command - Executes a command in a child process.
  * @path: Full path of the executable (e.g., /bin/ls).
