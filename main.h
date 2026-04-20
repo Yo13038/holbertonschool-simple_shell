@@ -11,12 +11,12 @@
 
 extern char **environ;
 
-int main(int ac, char **av, char **env);
-void shell_loop(char **env);
+
+int shell_loop(char **env, char *prog_name);
 int is_empty_line(char *line);
 void remove_newline(char *line);
-int handle_builtin(char **argv, char **env, char *line);
-void builtin_exit(char **argv, char *line);
+int handle_builtin(char **argv, char **env, char *line, int *status);
+void builtin_exit(char **argv, char *line, int status);
 int builtin_env(char **env);
 char **parse_line(char *line);
 char *_getenv(const char *name);
