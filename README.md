@@ -39,9 +39,9 @@ This project was completed in pairs as part of the Holberton School curriculum
 
 - Interactive mode
 - Non-interactive mode
-- Execution of commands with full path  
+- Execution of commands with full path<br>
   Example: `/bin/ls`
-- Execution of commands using `PATH`  
+- Execution of commands using `PATH`<br>
   Example: `ls`
 - Command parsing into arguments
 - Builtin `exit`
@@ -101,7 +101,7 @@ This version of simple_shell is a basic shell and does not support:
 - Advanced environment management
 - Signals beyond the project requirements
 
-##  Valgrind 
+##  Valgrind
 
 NEANT
 
