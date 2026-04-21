@@ -1,48 +1,48 @@
 #include "main.h"
 
 /**
- * execute_command - Executes a command in a child process.
- * @path: Full path of the executable (e.g., /bin/ls).
- * @argv: Array of arguments (e.g., {"ls", "-l", NULL}).
- * @env: System environment variables.
+ * execute_command - executes a command in a child process
+ * @path: full path of the executable
+ * @argv: array of arguments
+ * @env: environment variables
  *
- * Return: 1 on success, -1 on failure.
+ * Return: child exit status, or 1 on internal failure
  */
 int execute_command(char *path, char **argv, char **env)
 {
 	pid_t child_pid;
 	int status;
 
-	/* Basic validation of inputs */
+	/* Reject invalid execution data */
 	if (path == NULL || argv == NULL || argv[0] == NULL)
-		return (-1);
+		return (1);
 
 	child_pid = fork();
-
 	if (child_pid == -1)
 	{
-		/* Fork failed */
-		perror("Fork Error");
-		return (-1);
+		perror("fork");
+		return (1);
 	}
 
+	/* Replace the child process image with the requested program */
 	if (child_pid == 0)
 	{
-		/* CHILD PROCESS */
-		/* path is the full path found by find_command or provided directly */
 		if (execve(path, argv, env) == -1)
 		{
-			perror("Error");
-			/* Exit child process with error code */
+			perror(argv[0]);
 			exit(127);
 		}
 	}
-	else
-	{
-		/* PARENT PROCESS */
-		/* Wait for the specific child process to finish */
-		wait(&status);
-	}
 
+	/* Wait for the specific child and return its status */
+	if (waitpid(child_pid, &status, 0) == -1)
+	{
+		perror("waitpid");
+		return (1);
+	}
+	if (WIFEXITED(status))
+		return (WEXITSTATUS(status));
+	if (WIFSIGNALED(status))
+		return (128 + WTERMSIG(status));
 	return (1);
 }

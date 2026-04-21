@@ -10,13 +10,14 @@ void free_args(char **argv)
 {
 	int i;
 
+	/* Nothing to free if argv is NULL*/
 	if (argv == NULL)
 		return;
 
-	/* Free each argument string */
+	/* Free each duplicated argument string */
 	for (i = 0; argv[i] != NULL; i++)
 		free(argv[i]);
 
-	/* Free the array itself */
+	/* Free the array of pointers itself */
 	free(argv);
 }
