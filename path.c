@@ -127,7 +127,10 @@ char *find_command(char *command)
 	{
 		full_path = build_path(token, command);
 		if (is_executable_command(full_path))
-			return (free(path_copy), full_path);
+		{
+			free(path_copy);
+			return (full_path);
+		}
 		free(full_path);
 		token = strtok(NULL, ":");
 	}

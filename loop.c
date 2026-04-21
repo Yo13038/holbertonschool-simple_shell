@@ -48,7 +48,6 @@ static void print_error_message(char *prog_name, int count,
  */
 static int process_line(char *line, char **env,
 	char *prog_name, int count, int last_status)
-
 {
 	char **argv, *path;
 	int direct_path, status;
@@ -107,7 +106,7 @@ int shell_loop(char **env, char *prog_name)
 	while (1)
 	{
 		if (isatty(STDIN_FILENO))
-			write(STDOUT_FILENO, "$ ", 2);
+			write(STDOUT_FILENO, "($) ", 4);
 		nread = getline(&line, &len, stdin);
 		if (nread == -1)
 		{

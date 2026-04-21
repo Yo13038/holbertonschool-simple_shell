@@ -11,7 +11,6 @@
 
 extern char **environ;
 
-
 int shell_loop(char **env, char *prog_name);
 int is_empty_line(char *line);
 void remove_newline(char *line);
