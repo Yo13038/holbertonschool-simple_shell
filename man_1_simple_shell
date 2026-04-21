@@ -18,7 +18,7 @@ The shell works by:
 .SH FEATURES
 .TP
 .B Interactive Mode
-The shell displays a prompt "($) " when connected to a terminal (isatty).
+The shell displays a prompt "$ " when connected to a terminal (isatty).
 .TP
 .B Non-Interactive Mode
 The shell can read commands via pipes or redirected files: 'echo "ls" | ./hsh'.

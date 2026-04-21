@@ -108,7 +108,7 @@ int shell_loop(char **env, char *prog_name)
 	{
 		/* Print the prompt only in interactive mode */
 		if (isatty(STDIN_FILENO))
-			write(STDOUT_FILENO, "($) ", 4);
+			write(STDOUT_FILENO, "$ ", 2);
 		nread = getline(&line, &len, stdin);
 		if (nread == -1)
 		{
