@@ -85,6 +85,7 @@ gcc -Wall -Werror -Wextra -pedantic -std=gnu89 *.c -o hsh
 ##  Usage
 
 Run the shell in interactive mode:
+
 ```bash
 $ ./hsh
 $ /bin/ls
@@ -94,6 +95,7 @@ $ exit
 ```
 
 Run the shell in non-interactive mode:
+
 ```bash
 $ echo "/bin/ls" | ./hsh
 $ printf "env\nexit\n" | ./hsh
