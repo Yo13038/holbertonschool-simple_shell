@@ -86,17 +86,17 @@ gcc -Wall -Werror -Wextra -pedantic -std=gnu89 *.c -o hsh
 
 Run the shell in interactive mode:
 ```
-($) ./hsh
-($) /bin/ls
-($) ls -l
-($) env
-($) exit
+$ ./hsh
+$ /bin/ls
+$ ls -l
+$ env
+$ exit
 ```
 
 Run the shell in non-interactive mode:
 ```
-($) echo "/bin/ls" | ./hsh
-($) printf "env\nexit\n" | ./hsh
+$ echo "/bin/ls" | ./hsh
+$ printf "env\nexit\n" | ./hsh
 ```
 
 ## Manual
@@ -104,7 +104,7 @@ Run the shell in non-interactive mode:
 To open the manual page, run:
 
 ```bash
-($) man ./man_1_simple_shell
+$ man ./man_1_simple_shell
 ```
 
 ##  Limitations
@@ -123,7 +123,7 @@ This version of simple_shell is a basic shell and does not support:
 
 You can test memory leaks with:
 ```
-($) printf "env\n/bin/ls\nqwerty\nexit\n" | valgrind --leak-check=full --show-leak-kinds=all ./hsh
+$ printf "env\n/bin/ls\nqwerty\nexit\n" | valgrind --leak-check=full --show-leak-kinds=all ./hsh
 ```
 
 Expected goal:
