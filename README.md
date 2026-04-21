@@ -147,3 +147,7 @@ Expected goal:
 | Jonathan Martin | [John-Natty](https://github.com/John-Natty) |
 
 Students at Holberton School, Toulouse.
+
+## License
+
+This project is part of the Holberton School curriculum. All rights reserved.
