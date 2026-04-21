@@ -15,6 +15,8 @@ char *_getenv(const char *name)
 		return (NULL);
 	i = 0;
 	len = _strlen((char *)name);
+
+	/* Scan the environment array until a matching name is found */
 	while (environ[i] != NULL)
 	{
 		if (_strncmp(environ[i], (char *)name, len) == 0 &&
@@ -41,6 +43,7 @@ int contains_slash(char *command)
 	i = 0;
 	while (command[i] != '\0')
 	{
+		/* A slash means the command already contains a path */
 		if (command[i] == '/')
 			return (1);
 		i++;
@@ -66,10 +69,13 @@ char *build_path(char *dir, char *cmd)
 
 	len_dir = _strlen(dir);
 	len_cmd = _strlen(cmd);
+
+	/* Allocate enough space for dir + '/' + cmd + '\0' */
 	path = malloc(sizeof(char) * (len_dir + len_cmd + 2));
 	if (path == NULL)
 		return (NULL);
 
+		/* Build the final path string */
 	_strcpy(path, dir);
 	path[len_dir] = '/';
 	_strcpy(path + len_dir + 1, cmd);
@@ -86,8 +92,11 @@ int is_executable_command(char *path)
 {
 	struct stat st;
 
+	/* The path must exist, be a regular file, and be executable */
 	if (path == NULL)
 		return (0);
+
+	/* The file must exist before checking its type and permissions */
 	if (stat(path, &st) != 0)
 		return (0);
 	if (!S_ISREG(st.st_mode))
@@ -112,12 +121,14 @@ char *find_command(char *command)
 
 	if (command == NULL)
 		return (NULL);
+	/* If command already contains a path, just validate it */
 	if (contains_slash(command))
 		return (is_executable_command(command) ? _strdup(command) : NULL);
 
 	path_env = _getenv("PATH");
 	if (path_env == NULL)
 		return (NULL);
+	/* Duplicate PATH because strtok modifies the string */
 	path_copy = _strdup(path_env);
 	if (path_copy == NULL)
 		return (NULL);

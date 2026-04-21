@@ -11,13 +11,16 @@
  */
 int handle_builtin(char **argv, char **env, char *line, int *status)
 {
+	/* Invalid argv cannot match a builtin */
 	if (argv == NULL || argv[0] == NULL)
 		return (0);
+		/* Exit the shell using the current status */
 	if (_strcmp(argv[0], "exit") == 0)
 	{
 		builtin_exit(argv, line, *status);
 		return (1);
 	}
+	/* Print the environment and store its status */
 	if (_strcmp(argv[0], "env") == 0)
 	{
 		*status = builtin_env(env);
@@ -36,8 +39,10 @@ int handle_builtin(char **argv, char **env, char *line, int *status)
  */
 void builtin_exit(char **argv, char *line, int status)
 {
+	/* Free allocated ressources before leaving the shell */
 	free_args(argv);
 	free(line);
+
 	exit(status);
 }
 
@@ -51,6 +56,7 @@ int builtin_env(char **env)
 {
 	int i;
 
+	/* Print one environment entry per line */
 	for (i = 0; env[i] != NULL; i++)
 		printf("%s\n", env[i]);
 	return (0);

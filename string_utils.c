@@ -37,6 +37,7 @@ char *_strcpy(char *dest, char *src)
 	i = 0;
 	while (src[i] != '\0')
 	{
+		/* Copy one character at a time */
 		dest[i] = src[i];
 		i++;
 	}
@@ -64,6 +65,7 @@ char *_strdup(char *s)
 	if (new_str == NULL)
 		return (NULL);
 
+	/* Copy the original string into the new allocated buffer */
 	_strcpy(new_str, s);
 	return (new_str);
 }
@@ -82,6 +84,7 @@ int _strcmp(char *s1, char *s2)
 	i = 0;
 	while (s1[i] != '\0' && s2[i] != '\0')
 	{
+		/* Stop as soon as a different character is found */
 		if (s1[i] != s2[i])
 			return (s1[i] - s2[i]);
 		i++;
@@ -105,6 +108,7 @@ int _strncmp(char *s1, char *s2, int n)
 	i = 0;
 	while (i < n && s1[i] != '\0' && s2[i] != '\0')
 	{
+		/* Return the difference at the first mismatch */
 		if (s1[i] != s2[i])
 			return (s1[i] - s2[i]);
 		i++;

@@ -52,6 +52,7 @@ static int process_line(char *line, char **env,
 	char **argv, *path;
 	int direct_path, status;
 
+	/* Keep the previous status unless a new command changes it */
 	status = last_status;
 	argv = parse_line(line);
 	if (argv == NULL)
@@ -105,6 +106,7 @@ int shell_loop(char **env, char *prog_name)
 
 	while (1)
 	{
+		/* Print the prompt only in interactive mode */
 		if (isatty(STDIN_FILENO))
 			write(STDOUT_FILENO, "($) ", 4);
 		nread = getline(&line, &len, stdin);
@@ -132,6 +134,7 @@ void remove_newline(char *line)
 {
 	while (*line)
 	{
+		/* Stop the string at the newline added by getline */
 		if (*line == '\n')
 		{
 			*line = '\0';
@@ -151,6 +154,7 @@ int is_empty_line(char *line)
 {
 	while (*line)
 	{
+		/* Any non-space/tab character means the line is not empty */
 		if (!(*line == ' ' || *line == '\t'))
 			return (0);
 		line++;

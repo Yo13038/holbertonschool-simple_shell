@@ -121,7 +121,7 @@ This version of simple_shell is a basic shell and does not support:
 
 ##  Valgrind
 
-You can test memory leaks with: 
+You can test memory leaks with:
 ```
 ($) printf "env\n/bin/ls\nqwerty\nexit\n" | valgrind --leak-check=full --show-leak-kinds=all ./hsh
 ```
@@ -131,9 +131,9 @@ Expected goal:
 ==13872== HEAP SUMMARY:
 ==13872==     in use at exit: 0 bytes in 0 blocks
 ==13872==   total heap usage: 47 allocs, 47 frees, 8,075 bytes allocated
-==13872== 
+==13872==
 ==13872== All heap blocks were freed -- no leaks are possible
-==13872== 
+==13872==
 ==13872== For lists of detected and suppressed errors, rerun with: -s
 ==13872== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
 ```

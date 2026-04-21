@@ -12,6 +12,7 @@ static int count_tokens(char *line)
 	char *token;
 	int count;
 
+	/* Duplicate the line because strtok modifies the string */
 	copy = _strdup(line);
 	if (copy == NULL)
 		return (0);
@@ -36,6 +37,7 @@ static int count_tokens(char *line)
  */
 static void free_partial_args(char **argv, int count)
 {
+	/* Free only the entries that were successfully allocated */
 	while (count > 0)
 	{
 		count--;
@@ -59,6 +61,7 @@ char **parse_line(char *line)
 
 	if (line == NULL)
 		return (NULL);
+		/* Count tokens before allocating argv */
 	count = count_tokens(line);
 	if (count == 0)
 		return (NULL);
@@ -71,6 +74,7 @@ char **parse_line(char *line)
 	token = strtok(line, " \t\n\r");
 	while (token != NULL)
 	{
+		/* Duplicate each token so argv owns its memory */
 		argv[i] = _strdup(token);
 		if (argv[i] == NULL)
 		{
@@ -80,6 +84,7 @@ char **parse_line(char *line)
 		i++;
 		token = strtok(NULL, " \t\n\r");
 	}
+	/* End the array with NULL for execve */
 	argv[i] = NULL;
 	return (argv);
 }

@@ -13,6 +13,7 @@ int execute_command(char *path, char **argv, char **env)
 	pid_t child_pid;
 	int status;
 
+	/* Reject invalid execution data */
 	if (path == NULL || argv == NULL || argv[0] == NULL)
 		return (1);
 
@@ -22,6 +23,8 @@ int execute_command(char *path, char **argv, char **env)
 		perror("fork");
 		return (1);
 	}
+
+	/* Replace the child process image with the requested program */
 	if (child_pid == 0)
 	{
 		if (execve(path, argv, env) == -1)
@@ -30,6 +33,8 @@ int execute_command(char *path, char **argv, char **env)
 			exit(127);
 		}
 	}
+
+	/* Wait for the specific child and return its status */
 	if (waitpid(child_pid, &status, 0) == -1)
 	{
 		perror("waitpid");
