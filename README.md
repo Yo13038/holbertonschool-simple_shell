@@ -70,7 +70,7 @@ This project was completed in pairs as part of the Holberton School curriculum
 ##  Installation
 
 Clone the repository and move into the project directory:
-```
+```bash
 git clone <https://github.com/Yo13038/holbertonschool-simple_shell.git>
 cd holberton-simple_shell
 ```
@@ -78,14 +78,15 @@ cd holberton-simple_shell
 ##  Compilation
 
 Compile the project with:
-```
+```bash
 gcc -Wall -Werror -Wextra -pedantic -std=gnu89 *.c -o hsh
 ```
 
 ##  Usage
 
 Run the shell in interactive mode:
-```
+
+```bash
 $ ./hsh
 $ /bin/ls
 $ ls -l
@@ -94,7 +95,8 @@ $ exit
 ```
 
 Run the shell in non-interactive mode:
-```
+
+```bash
 $ echo "/bin/ls" | ./hsh
 $ printf "env\nexit\n" | ./hsh
 ```
@@ -122,12 +124,12 @@ This version of simple_shell is a basic shell and does not support:
 ##  Valgrind
 
 You can test memory leaks with:
-```
+```bash
 $ printf "env\n/bin/ls\nqwerty\nexit\n" | valgrind --leak-check=full --show-leak-kinds=all ./hsh
 ```
 
 Expected goal:
-```
+```bash
 ==13872== HEAP SUMMARY:
 ==13872==     in use at exit: 0 bytes in 0 blocks
 ==13872==   total heap usage: 47 allocs, 47 frees, 8,075 bytes allocated
@@ -147,3 +149,7 @@ Expected goal:
 | Jonathan Martin | [John-Natty](https://github.com/John-Natty) |
 
 Students at Holberton School, Toulouse.
+
+## License
+
+This project is part of the Holberton School curriculum. All rights reserved.
