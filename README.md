@@ -140,7 +140,7 @@ Expected goal:
 
 ##  Flowchart
 
-![Description]()
+![Description](https://github.com/Yo13038/holbertonschool-simple_shell/blob/jo/flowchart-simple_shell.png)
 
 ##  Authors
 | Yohan Lages | [Yo13038](https://github.com/Yo13038) |<br>
