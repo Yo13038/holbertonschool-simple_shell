@@ -70,7 +70,7 @@ This project was completed in pairs as part of the Holberton School curriculum
 ##  Installation
 
 Clone the repository and move into the project directory:
-```
+```bash
 git clone <https://github.com/Yo13038/holbertonschool-simple_shell.git>
 cd holberton-simple_shell
 ```
@@ -78,25 +78,25 @@ cd holberton-simple_shell
 ##  Compilation
 
 Compile the project with:
-```
+```bash
 gcc -Wall -Werror -Wextra -pedantic -std=gnu89 *.c -o hsh
 ```
 
 ##  Usage
 
 Run the shell in interactive mode:
-```
-($) ./hsh
-($) /bin/ls
-($) ls -l
-($) env
-($) exit
+```bash
+$ ./hsh
+$ /bin/ls
+$ ls -l
+$ env
+$ exit
 ```
 
 Run the shell in non-interactive mode:
-```
-($) echo "/bin/ls" | ./hsh
-($) printf "env\nexit\n" | ./hsh
+```bash
+$ echo "/bin/ls" | ./hsh
+$ printf "env\nexit\n" | ./hsh
 ```
 
 ## Manual
@@ -104,7 +104,7 @@ Run the shell in non-interactive mode:
 To open the manual page, run:
 
 ```bash
-($) man ./man_1_simple_shell
+$ man ./man_1_simple_shell
 ```
 
 ##  Limitations
@@ -122,12 +122,12 @@ This version of simple_shell is a basic shell and does not support:
 ##  Valgrind
 
 You can test memory leaks with:
-```
-($) printf "env\n/bin/ls\nqwerty\nexit\n" | valgrind --leak-check=full --show-leak-kinds=all ./hsh
+```bash
+$ printf "env\n/bin/ls\nqwerty\nexit\n" | valgrind --leak-check=full --show-leak-kinds=all ./hsh
 ```
 
 Expected goal:
-```
+```bash
 ==13872== HEAP SUMMARY:
 ==13872==     in use at exit: 0 bytes in 0 blocks
 ==13872==   total heap usage: 47 allocs, 47 frees, 8,075 bytes allocated
